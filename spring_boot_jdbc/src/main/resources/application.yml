@@ -1,0 +1,20 @@
+server:
+  port: 80
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/thymeleaf/
+    suffix: .html
+    mode: HTML
+    cache: false
+    servlet:
+      content-type: text/html
+    encoding: UTF-8
+  web:
+    resources:
+      static-locations: classpath:/static/,classpath:/templates/
+#自定义配置使用@ConfigurationProperties注入属性
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+  username: root
+  password: root
