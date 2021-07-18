@@ -29,6 +29,7 @@
         <module>../spring_boot_static_resource</module>
         <module>../spring_boot_thymeleaf</module>
         <module>../spring_boot_validate_devtools</module>
+        <module>../spring_boot_email</module>
     </modules>
 
     <properties>
