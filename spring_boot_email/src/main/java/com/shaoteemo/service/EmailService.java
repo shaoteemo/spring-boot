@@ -16,6 +16,6 @@ public interface EmailService {
 
     boolean sendMimeEmail(String subject , String msg , String address) throws Exception;
 
-    boolean sendMimeHelperHtmlEmail(String subject , String msg , String ... address) throws Exception;
+    boolean sendMimeHelperHtmlEmail(String subject , String msg , String ... address);
 
 }

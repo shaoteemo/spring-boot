@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
@@ -30,7 +31,7 @@ import java.util.Map;
  *
  * @author ShaoTeemo
  * @date 2021/7/18
- * @since 1.3
+ * @since 1.3.1
  */
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -83,29 +84,29 @@ public class EmailServiceImpl implements EmailService {
      * @param msg
      * @param address
      * @return
-     * @throws Exception
      */
     @Override
-    public boolean sendMimeHelperHtmlEmail(String subject, String msg, String... address) throws Exception {
+    public boolean sendMimeHelperHtmlEmail(String subject, String msg, String... address) {
         MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
-        /*创建支持替代文本、内联元素和附件的多部分消息*/
-        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-        /*收件人*/
-        mimeMessageHelper.setTo(address);
-        /*发件人*/
-        mimeMessageHelper.setFrom(this.fromUser);
-        mimeMessageHelper.setSubject(subject);
-        mimeMessageHelper.setSentDate(new Date());
-        mimeMessageHelper.setReplyTo(this.fromUser);
-        /*模板填充的参数*/
-        Map<String, Object> variables = new HashMap<>();
-        variables.put("hello", msg);
-        /*设置为Html文本*/
-        mimeMessageHelper.setText(this.templateUtil.getThymeLeafTemplate(BaseConstant.SEND_EMAIL_TEMPLATE, variables), true);
         try {
+            /*创建支持替代文本、内联元素和附件的多部分消息*/
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            /*收件人*/
+            mimeMessageHelper.setTo(address);
+            /*发件人*/
+            mimeMessageHelper.setFrom(this.fromUser);
+            mimeMessageHelper.setSubject(subject);
+            mimeMessageHelper.setSentDate(new Date());
+            mimeMessageHelper.setReplyTo(this.fromUser);
+            /*模板填充的参数*/
+            Map<String, Object> variables = new HashMap<>();
+            variables.put("hello", msg);
+            /*设置为Html文本*/
+            mimeMessageHelper.setText(this.templateUtil.getThymeLeafTemplate(BaseConstant.SEND_EMAIL_TEMPLATE, variables), true);
+
             this.javaMailSender.send(mimeMessage);
             return true;
-        } catch (MailException e) {
+        } catch (MailException | MessagingException e) {
             e.printStackTrace();
             return false;
         }
