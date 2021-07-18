@@ -24,8 +24,9 @@ import java.util.Map;
  * 所属包：com.shaoteemo.service.impl
  * <p>
  * 下面两种邮件发送接口均为JavaMail扩展接口。
- * 其中JavaMailSender为{@link org.springframework.mail.MailSender}的子接口功能更加丰富。可包含附件发送等。
+ * 其中{@link org.springframework.mail.javamail.JavaMailSender}为{@link org.springframework.mail.MailSender}的子接口,功能更加丰富。可包含附件发送等。
  * 邮件回话{@link javax.mail.Session}一些原始的参数信息也在该会话中设置。（PS：这些参数的说明目前还没在文档中有找到）
+ * 提示：推荐使用异步发送邮件。
  *
  * @author ShaoTeemo
  * @date 2021/7/18
