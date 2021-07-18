@@ -30,7 +30,7 @@ import java.util.Map;
  *
  * @author ShaoTeemo
  * @date 2021/7/18
- * @since 1.0
+ * @since 1.3
  */
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -88,7 +88,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public boolean sendMimeHelperHtmlEmail(String subject, String msg, String... address) throws Exception {
         MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
-        /*设置为流文件*/
+        /*创建支持替代文本、内联元素和附件的多部分消息*/
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
         /*收件人*/
         mimeMessageHelper.setTo(address);
